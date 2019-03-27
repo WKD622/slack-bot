@@ -1,0 +1,191 @@
+<aiml version="1.0.1" encoding="UTF-8">
+<!-- basic_chat.aiml -->
+
+    <category>
+        <pattern>HELLO</pattern>
+        <template>
+            <random>
+                <li> Well, hello! What would you like to order?</li>
+                <li> Hi!</li>
+                <li> Nice to meet you! What would you like to order?</li>
+                <li> Hi, nice to meet you!</li>
+                <li> Hello! What would you like to order?</li>
+            </random>
+        </template>
+    </category>
+
+    <category>
+        <pattern>GOOD MORNING</pattern>
+        <template><srai>HELLO</srai></template>
+    </category>
+    <category>
+        <pattern>HI</pattern>
+        <template><srai>HELLO</srai></template>
+    </category>
+    <category>
+        <pattern>NICE TO MEET TO</pattern>
+        <template><srai>HELLO</srai></template>
+    </category>
+     <category>
+        <pattern>GOOD EVENING</pattern>
+        <template><srai>HELLO</srai></template>
+    </category>
+     <category>
+        <pattern>GOOD AFTERNOON</pattern>
+        <template><srai>HELLO</srai></template>
+    </category>
+
+    <category>
+        <pattern>WHAT IS YOUR NAME</pattern>
+            <template>
+                My name is Jessica!
+            </template>
+    </category>
+
+    <category>
+        <pattern>WHAT ARE YOU</pattern>
+        <template>
+            I'm a bot, silly!
+        </template>
+    </category>
+
+    <category>
+        <pattern>HOW OLD ARE YOU</pattern>
+        <template>I'm sure that I'm younger than you!</template>
+    </category>
+    <category>
+        <pattern>WHEN WERE YOU BORN</pattern>
+        <template><srai>HOW OLD ARE YOU <star/></srai></template>
+    </category>
+
+    <category>
+        <pattern>CAN YOU SHOW ME A MENU</pattern>
+        <template>Our menu for today is on our website. Please check it under link: xxxxxx.</template>
+    </category>
+    <category>
+        <pattern>I WOULD LIKE TO SEE A *</pattern>
+        <template><srai>Can you show me a <star/></srai></template>
+    </category>
+
+    <category>
+        <pattern>I WOULD LIKE TO ORDER *</pattern>
+        <template>Ok, your order <star/> will be preared, give me your address please!</template>
+    </category>
+
+    <category>
+        <pattern>SO FOR ME WILL BE *</pattern>
+        <template>Ok, your order <star/> will be preared, give me your address please!</template>
+    </category>
+
+    <category>
+        <pattern>MY ADDRESS IS *</pattern>
+        <template>Ok, your order will be prepared and send to <star/></template>
+    </category>
+
+    <category>
+        <pattern>I WOULD LIKE TO ORDER SOMETHING</pattern>
+        <template>
+            <random>
+                <li>Nice!</li>
+                <li>Super!</li>
+            </random>
+            What would you like to order?
+        </template>
+    </category>
+    <category>
+        <pattern>I WOULD LIKE TO ORDER A MEAL</pattern>
+        <template><srai>I WOULD LIKE TO ORDER SOMETHING<star/></srai></template>
+    </category>
+
+
+    <category>
+        <pattern>*</pattern>
+        <that>* WHAT WOULD YOU LIKE TO ORDER</that>
+        <template>
+            Great, your <set name="favouriteLang"><star /> is being prepared. Give me your address please. </set>
+            <think><set name="favouriteLangSet">true</set></think>
+        </template>
+    </category>
+
+    <category>
+        <pattern>*</pattern>
+        <template>
+            I haven't understood you well. What would you like to order?
+        </template>
+    </category>
+
+    <category>
+        <pattern>*</pattern>
+        <that>* GIVE ME YOUR ADDRESS PLEASE</that>
+        <template>
+            Thanks a lot, please wait patiently for your order.
+        </template>
+    </category>
+
+
+    <category>
+        <pattern>DO YOU LIKE COOKING</pattern>
+        <template>
+         Sure! I work for the restaurant! What about you?
+            <think><set name="topic">COOKING</set></think>
+        </template>
+    </category>
+
+    <topic name="COOKING">
+        <category>
+            <pattern>YES</pattern>
+            <template>Great! What is your favorite dish?</template>
+        </category>
+        <category>
+            <pattern>ME TOO</pattern>
+            <template>Nice! What is your favorite dish?</template>
+        </category>
+         <category>
+            <pattern>SURE</pattern>
+            <template>Nice! What is your favorite dish?</template>
+        </category>
+
+
+        <category>
+            <pattern>NO</pattern>
+            <template>You have always our restaurant!</template>
+        </category>
+    </topic>
+
+    <category>
+        <pattern>*</pattern>
+        <that>* WHAT IS YOUR FAVORITE DISH</that>
+        <template>
+            Nice... My favorite is pizza. :-)
+        </template>
+    </category>
+
+    <category>
+        <pattern>*</pattern>
+        <template>
+            Saddly, I haven't understood you well... Maybe, you would like to order something?
+            <think><set name="topic">INCOMPREHENSIBILE</set></think>
+        </template>
+    </category>
+
+    <topic name="INCOMPREHENSIBILE">
+    <category>
+        <pattern>*</pattern>
+            <template>
+            <think><set name="var"><uppercase><star /></uppercase></set></think>
+            <condition>
+                <li name="var" value="YES">
+                <srai>I WOULD LIKE TO ORDER SOMETHING</srai>
+                <think><set name="topic"></set></think>
+                </li>
+                <li name="var" value="NO">
+                Ok, so what you want from me?
+                <think><set name="topic">*</set></think>
+                </li>
+                <li>YES OR NO?</li>
+            </condition>
+        </template>
+    </category>
+    </topic>
+
+</aiml>
